@@ -1,6 +1,6 @@
-# STATE — 마지막 갱신: 2026-07-04 16:18 KST
-- 완료: P1, P2, P2 리뷰 반영, P3 (feat/chat 게이트 통과)
-- 진행 중: P4 — 브랜치 미생성 — 목록/삭제 API 시작 전
-- 다음 작업: CONVENTIONS.md에 따라 P3 커밋 후 P4용 `feat/chat-query` 브랜치 생성, SPEC §4.2의 `GET /api/chats`와 `DELETE /api/threads/{threadId}` 구현
-- 미해결/주의: P3 smoke는 Gradle daemon 환경 캐시 때문에 1회 403이 났고, `--no-daemon` + 최신 `OPENAI_API_KEY` 명시 후 201 통과. 문서 20분은 P6까지 침범 금지.
-- 남은 시간 예산: 문서 20분 보존, P4는 조회/삭제 DoD에 한정
+# STATE — 마지막 갱신: 2026-07-04 16:31 KST
+- 완료: P1, P2, P2 리뷰 반영, P3, P4 (feat/chat-query-p4 게이트 통과)
+- 진행 중: P5 — 브랜치 미생성 — 피드백 CRUD 시작 전
+- 다음 작업: CONVENTIONS.md에 따라 P4 커밋/PR/squash merge 후 P5용 `feat/feedback` 브랜치 생성, SPEC §4.3 피드백 생성/조회/상태변경 구현
+- 미해결/주의: 원격 `feat/chat-query`에는 별도 README 커밋이 있어 P4 PR 브랜치는 `feat/chat-query-p4` 사용. smoke용 로컬 DB의 기존 admin 비밀번호가 현재 `ADMIN_PASSWORD`와 달라 DB password hash만 보정 후 admin 전체 조회 확인.
+- 남은 시간 예산: 문서 20분 보존, P5는 중복 생성 409와 필터/정렬 DoD에 한정

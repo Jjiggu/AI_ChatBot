@@ -2,6 +2,7 @@ package com.example.chatbot.chat
 
 import com.example.chatbot.domain.Chat
 import com.example.chatbot.domain.ChatRepository
+import com.example.chatbot.domain.FeedbackRepository
 import com.example.chatbot.domain.Thread
 import com.example.chatbot.domain.ThreadRepository
 import com.example.chatbot.domain.User
@@ -28,12 +29,13 @@ class ChatServiceTest {
 
     private val chatRepository = mock(ChatRepository::class.java)
     private val threadRepository = mock(ThreadRepository::class.java)
+    private val feedbackRepository = mock(FeedbackRepository::class.java)
     private val userRepository = mock(UserRepository::class.java)
     private val chatModelClient = mock(ChatModelClient::class.java)
 
     private val now = Instant.parse("2026-01-01T12:00:00Z")
     private val service = ChatService(
-        chatRepository, threadRepository, userRepository, chatModelClient, Clock.fixed(now, ZoneOffset.UTC),
+        chatRepository, threadRepository, feedbackRepository, userRepository, chatModelClient, Clock.fixed(now, ZoneOffset.UTC),
     )
 
     private val userId = UUID.randomUUID()
