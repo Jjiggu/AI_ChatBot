@@ -58,8 +58,7 @@ class SecurityConfig(@Value("\${jwt.secret}") secret: String) {
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests {
                 it.requestMatchers("/api/auth/**", "/actuator/health").permitAll()
-                    .requestMatchers("/api/**").authenticated()
-                    .anyRequest().permitAll()
+                    .anyRequest().authenticated()
             }
             .oauth2ResourceServer { rs ->
                 rs.jwt { it.jwtAuthenticationConverter(jwtConverter) }

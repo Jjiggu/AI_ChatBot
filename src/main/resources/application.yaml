@@ -16,9 +16,9 @@ spring:
         format_sql: true
 
 jwt:
-  # A4: HS256 — 운영에서는 반드시 JWT_SECRET 환경변수 주입 (32바이트 이상)
-  secret: ${JWT_SECRET:local-dev-only-secret-key-minimum-32-bytes!!}
+  # A4: HS256 — JWT_SECRET 환경변수 필수 (32바이트 이상), 미설정 시 기동 실패
+  secret: ${JWT_SECRET}
 
 admin:
-  # A2: 시드 관리자 비밀번호 — 운영에서는 ADMIN_PASSWORD 환경변수 주입
-  password: ${ADMIN_PASSWORD:admin12345}
+  # A2: 시드 관리자 비밀번호 — ADMIN_PASSWORD 환경변수 필수
+  password: ${ADMIN_PASSWORD}
