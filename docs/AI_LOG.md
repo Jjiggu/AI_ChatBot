@@ -29,3 +29,8 @@
 - 지시: SPEC §4.2의 스레드 그룹 목록과 스레드 삭제. MEMBER는 자기 것만, ADMIN은 전체 조회, 삭제는 소유자만.
 - 결과: `./gradlew test`, `./gradlew build`, curl smoke(스레드 그룹 200, 타인 삭제 403, admin 전체 조회 200, 소유자 삭제 204) 통과.
 - 수정: 원격 `feat/chat-query`의 별도 README 커밋을 덮지 않도록 P4 PR 브랜치를 `feat/chat-query-p4`로 분리. 로컬 smoke DB의 기존 admin hash가 현재 env와 달라 DB만 보정.
+
+## P5 피드백 (feat/feedback)
+- 지시: SPEC §4.3 피드백 생성/조회/상태변경, 중복 생성 409 테스트 1건, 필터/정렬 smoke.
+- 결과: `./gradlew test`, `./gradlew build`, curl smoke(생성 201, 중복 409, positive/negative 필터 200, member 상태변경 403, admin 상태변경 200) 통과.
+- 수정: Kotlin/Jackson Boolean `isPositive`가 `positive`로 해석되어 400이 나던 DTO를 `@JsonProperty("isPositive")`로 고정.

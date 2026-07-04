@@ -113,7 +113,7 @@ class Feedback(
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    val status: FeedbackStatus = FeedbackStatus.PENDING,
+    var status: FeedbackStatus = FeedbackStatus.PENDING,
 
     @Column(nullable = false)
     val createdAt: Instant,
