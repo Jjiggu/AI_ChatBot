@@ -24,3 +24,8 @@
 - 지시: SPEC §4.2 대화 생성 중 비스트리밍 POST /api/chats, A3/A9, 30분 규칙 테스트 3건.
 - 결과: `./gradlew cleanTest test`, `./gradlew build`, curl smoke(health→signup→login→chat 201) 통과. OpenAI 직접 호출 200, 앱 응답 201 확인.
 - 수정: Gradle daemon이 이전 OpenAI env를 잡고 있어 `--no-daemon`으로 smoke 재실행. `docs/AGENTS.md ` 추적 경로를 정상 `docs/AGENTS.md`로 정리 예정.
+
+## P4 조회/삭제 (feat/chat-query-p4)
+- 지시: SPEC §4.2의 스레드 그룹 목록과 스레드 삭제. MEMBER는 자기 것만, ADMIN은 전체 조회, 삭제는 소유자만.
+- 결과: `./gradlew test`, `./gradlew build`, curl smoke(스레드 그룹 200, 타인 삭제 403, admin 전체 조회 200, 소유자 삭제 204) 통과.
+- 수정: 원격 `feat/chat-query`의 별도 README 커밋을 덮지 않도록 P4 PR 브랜치를 `feat/chat-query-p4`로 분리. 로컬 smoke DB의 기존 admin hash가 현재 env와 달라 DB만 보정.
