@@ -14,3 +14,13 @@
 - 지시: Codex 지적 3건 — JWT_SECRET 기본값 제거, permitAll→deny-by-default, ADMIN_PASSWORD 필수화.
 - 결과: 3건 전부 반영. env 미설정 기동 실패 확인, 정상 기동 시 401/admin 200/비-API 401 게이트 통과.
 - 수정: 없음. 트레이드오프 — 데모 기동에 env 2개 필수화, README에서 안내 예정.
+
+## 인수 기록 (Codex, P3 진행 중)
+- 지시: Claude Code 중단 후 Orchestrator 겸 Builder로 인수, STATE 부재를 실제 repo 상태 기준으로 복구.
+- 결과: `feat/chat`의 P3 구현/테스트를 확인했고 `./gradlew test`, `./gradlew build` 성공. 실제 OpenAI smoke는 현재 프로젝트가 `gpt-4o-mini` 접근 권한 없음(403)으로 차단.
+- 수정: `ChatService.create`에 트랜잭션 적용, `docs/STATE.md` 신규 작성.
+
+## P3 대화 (feat/chat)
+- 지시: SPEC §4.2 대화 생성 중 비스트리밍 POST /api/chats, A3/A9, 30분 규칙 테스트 3건.
+- 결과: `./gradlew cleanTest test`, `./gradlew build`, curl smoke(health→signup→login→chat 201) 통과. OpenAI 직접 호출 200, 앱 응답 201 확인.
+- 수정: Gradle daemon이 이전 OpenAI env를 잡고 있어 `--no-daemon`으로 smoke 재실행. `docs/AGENTS.md ` 추적 경로를 정상 `docs/AGENTS.md`로 정리 예정.

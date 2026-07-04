@@ -10,6 +10,10 @@ interface UserRepository : JpaRepository<User, UUID> {
 
 interface ThreadRepository : JpaRepository<Thread, UUID>
 
-interface ChatRepository : JpaRepository<Chat, UUID>
+interface ChatRepository : JpaRepository<Chat, UUID> {
+    /** A3: 30분 규칙 판단용 — 유저의 가장 최근 chat */
+    fun findTopByThreadUserIdOrderByCreatedAtDesc(userId: UUID): Chat?
+    fun findByThreadIdOrderByCreatedAtAsc(threadId: UUID): List<Chat>
+}
 
 interface FeedbackRepository : JpaRepository<Feedback, UUID>

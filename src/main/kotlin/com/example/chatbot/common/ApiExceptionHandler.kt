@@ -3,6 +3,7 @@ package com.example.chatbot.common
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -10,9 +11,21 @@ import org.springframework.web.server.ResponseStatusException
 
 data class ErrorResponse(val code: String, val message: String)
 
+/** status.name과 다른 에러 code가 필요한 경우만 사용 (예: NOT_SUPPORTED) */
+class ApiException(val status: HttpStatus, val code: String, override val message: String) : RuntimeException(message)
+
 /** 공통 에러 포맷 `{ code, message }` — 커스텀 예외 대신 ResponseStatusException 사용 */
 @RestControllerAdvice
 class ApiExceptionHandler {
+
+    @ExceptionHandler(ApiException::class)
+    fun handleApi(e: ApiException): ResponseEntity<ErrorResponse> =
+        ResponseEntity.status(e.status).body(ErrorResponse(e.code, e.message))
+
+    /** 본문 파싱 실패(필수 필드 누락 등)도 공통 포맷으로 */
+    @ExceptionHandler(HttpMessageNotReadableException::class)
+    fun handleUnreadable(e: HttpMessageNotReadableException): ResponseEntity<ErrorResponse> =
+        error(HttpStatus.BAD_REQUEST, "요청 본문이 올바르지 않습니다")
 
     @ExceptionHandler(ResponseStatusException::class)
     fun handleStatus(e: ResponseStatusException): ResponseEntity<ErrorResponse> =
