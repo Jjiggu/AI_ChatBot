@@ -1,0 +1,11 @@
+# 비개발자용: `docker compose up -d` 한 줄로 DB 기동 (기본값 고정)
+services:
+  postgres:
+    image: postgres:15.8
+    container_name: ai-chatbot-postgres
+    environment:
+      POSTGRES_DB: ai_chatbot
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
