@@ -22,3 +22,7 @@ jwt:
 admin:
   # A2: 시드 관리자 비밀번호 — ADMIN_PASSWORD 환경변수 필수
   password: ${ADMIN_PASSWORD}
+
+openai:
+  # A1: OPENAI_API_KEY 환경변수 필수
+  api-key: ${OPENAI_API_KEY}
