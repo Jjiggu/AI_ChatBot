@@ -24,4 +24,8 @@ interface ChatRepository : JpaRepository<Chat, UUID> {
 
 interface FeedbackRepository : JpaRepository<Feedback, UUID> {
     fun deleteByChatThreadId(threadId: UUID)
+    fun existsByUserIdAndChatId(userId: UUID, chatId: UUID): Boolean
+    fun findByUserId(userId: UUID, pageable: Pageable): Page<Feedback>
+    fun findByUserIdAndIsPositive(userId: UUID, isPositive: Boolean, pageable: Pageable): Page<Feedback>
+    fun findByIsPositive(isPositive: Boolean, pageable: Pageable): Page<Feedback>
 }
