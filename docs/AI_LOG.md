@@ -9,3 +9,8 @@
 - 지시: SPEC §4.1 + A2/A4/A5. 가입/로그인/JWT 보호, admin 시드, RestControllerAdvice 1개.
 - 결과: 게이트(빌드 + curl 6단계: 201/409/토큰/401/필터통과/admin 200) 1회 통과.
 - 수정: 없음. Builder가 커스텀 JWT 필터 대신 내장 Nimbus 채택(허용한 택1) — 직접 작성 코드 감소.
+
+## P2 리뷰 반영 (PR #3, Codex 리뷰)
+- 지시: Codex 지적 3건 — JWT_SECRET 기본값 제거, permitAll→deny-by-default, ADMIN_PASSWORD 필수화.
+- 결과: 3건 전부 반영. env 미설정 기동 실패 확인, 정상 기동 시 401/admin 200/비-API 401 게이트 통과.
+- 수정: 없음. 트레이드오프 — 데모 기동에 env 2개 필수화, README에서 안내 예정.
